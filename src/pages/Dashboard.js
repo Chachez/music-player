@@ -111,7 +111,7 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-12">
+          <div className="grid grid-cols-1 xl:grid-cols-10">
             <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
               <PageVisitsCard />
             </div>

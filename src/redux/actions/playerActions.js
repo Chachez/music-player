@@ -45,3 +45,19 @@ export const searchParameters = (data) => async (dispatch) => {
     payload: data,
   });
 };
+
+export const artistDetails = (data) => async (dispatch) => {
+  return await axios
+    .get(
+      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${data}`
+    )
+    .then((res) =>
+      dispatch({
+        type: tracks.ARTIST_DETAILS,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      console.log(err);
+    });
+};

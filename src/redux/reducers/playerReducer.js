@@ -4,6 +4,7 @@ const initialState = {
   searchedData: [],
   topCharts: [],
   searchParams: "",
+  artistDetails: [],
 };
 
 const PlayerReducer = (state = initialState, action) => {
@@ -24,6 +25,12 @@ const PlayerReducer = (state = initialState, action) => {
       return {
         ...state,
         searchParams: action.payload,
+      };
+
+    case tracks.ARTIST_DETAILS:
+      return {
+        ...state,
+        artistDetails: action.payload,
       };
     default:
       return state;

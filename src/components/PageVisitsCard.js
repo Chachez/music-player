@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Card, CardHeader, CardBody } from "@material-tailwind/react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
+
+//custome imports
 import { timeConverter } from "utils/timeConvertor";
+import { artistDetails } from "../redux/actions/playerActions";
 
 const columns = [
   { id: "artist", label: "Artist" },
@@ -9,9 +13,16 @@ const columns = [
   { id: "album", label: "Album" },
 ];
 export default function PageVisitsCard() {
+  const [values, setValues] = useState({
+    artistId: "",
+  });
   const state = useSelector((state) => state, shallowEqual);
+  const dispatch = useDispatch();
 
-  console.log(state.playerReducer.searchedData.error?.message);
+  const artist = () => {
+    let data = values.artistId;
+    dispatch(artistDetails(data));
+  };
 
   return (
     <Card>
@@ -39,7 +50,9 @@ export default function PageVisitsCard() {
               <tbody>
                 <tr
                   key={data.id}
-                  onClick={() => console.log(data.id)}
+                  onClick={() => {
+                    dispatch(artistDetails(data.id));
+                  }}
                   style={{ cursor: "pointer" }}
                 >
                   <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">

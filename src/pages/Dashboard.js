@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import StatusCard from "components/StatusCard";
-import ChartLine from "components/ChartLine";
-import ChartBar from "components/ChartBar";
-import PageVisitsCard from "components/PageVisitsCard";
-import TrafficCard from "components/TrafficCard";
+import SearchResults from "components/SearchResults";
 import { Input, Button, Icon } from "@material-tailwind/react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
@@ -13,7 +10,6 @@ import {
   searchTerm,
   searchParameters,
 } from "../redux/actions/playerActions";
-import { getResults } from "../utils/getResults";
 
 export default function Dashboard() {
   const history = useHistory();
@@ -31,7 +27,7 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    // dispatch(getCharts());
+    dispatch(getCharts());
   }, []);
 
   return (
@@ -48,6 +44,7 @@ export default function Dashboard() {
               percentageIcon="arrow_upward"
               percentage="1"
               date={state.playerReducer.topCharts.albums?.data[0].title}
+              onClick={() => history.push("/albums")}
             />
             <StatusCard
               color="purple"
@@ -67,6 +64,7 @@ export default function Dashboard() {
               percentageIcon="arrow_upward"
               percentage="1"
               date={state.playerReducer.topCharts.playlists?.data[0].title}
+              onClick={() => history.push("/playlists")}
             />
             <StatusCard
               color="blue"
@@ -76,6 +74,7 @@ export default function Dashboard() {
               percentageIcon="arrow_upward"
               percentage="1"
               date={state.playerReducer.topCharts.podcasts?.data[0].title}
+              onClick={() => history.push("/podcasts")}
             />
           </div>
         </div>
@@ -111,9 +110,9 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-10">
+          <div className="grid grid-cols-1 xl:grid-cols-12">
             <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-              <PageVisitsCard />
+              <SearchResults />
             </div>
           </div>
         </div>
